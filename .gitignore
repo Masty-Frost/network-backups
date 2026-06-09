@@ -1,3 +1,5 @@
+@"
+# NetBox original
 *.sql.gz
 .netbox
 .python-version
@@ -12,3 +14,32 @@ configuration/ldap/*
 !configuration/logging.py
 !configuration/plugins.py
 super-linter.log
+
+# Oxidized + proyecto
+env/
+env/*.env
+.env
+.env.local
+.env.*.local
+config/oxidized.pid
+config/oxidized.log
+config/crash
+config/*.swp
+oxidized-config/laboratorio/
+oxidized-config/oxidized.pid
+oxidized-config/oxidized.log
+oxidized-config/crash
+oxidized-config/logs/
+oxidized-config/router.db
+oxidized-config/*.swp
+*.pid
+*.log
+volumes/
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+"@ | Out-File -Encoding UTF8 .gitignore"vrnetlab/" 
+"vrnetlab/" 

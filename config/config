@@ -1,0 +1,82 @@
+username: oxidized
+password: S3cr3tx
+model: frr
+interval: 3600 #interval in seconds, when 0 is configured no fetch config is done at initial start and after
+debug: true
+threads: 30 # maximum number of threads
+# use_max_threads:
+# false - the number of threads is selected automatically based on the interval option, but not more than the maximum
+# true - always use the maximum number of threads
+use_max_threads: false
+timeout: 20
+timelimit: 300
+retries: 3
+prompt: !ruby/regexp /^([\w.@-]+[#>]\s?)$/
+log: /home/oxidized/.config/oxidized/oxidized.log
+crash:
+  directory: /home/oxidized/.config/oxidized/crashes
+  hostnames: false
+vars:
+  enable: S3cre7
+groups: {}
+extensions:
+  oxidized-web:
+    load: true
+    # Bind to any IPv4 interface
+    listen: 0.0.0.0
+    port: 8888
+    # Bind to port 8888 (default)
+    # Prefix prod to the URL, so http://oxidized.full.domain/prod/
+    url_prefix: ""
+    # virtual hosts to listen to (others will be denied)
+    vhosts:
+      - localhost
+      - 127.0.0.1
+      - oxidized
+      - oxidized.full.domain
+pid: /home/oxidized/.config/oxidized/oxidized.pid
+input:
+  default: ssh, telnet
+  debug: false
+  ssh:
+    secure: false
+output:
+  default: git
+  git:
+    user: Oxidized
+    email: oxidized@example.com
+    repo: /home/oxidized/.config/oxidized/oxidized.git
+source:
+  default: http
+  http:
+    url: http://netbox-docker-netbox-1:8080/api/dcim/devices/?cf_oxidized_backup=true
+    scheme: http
+    secure: false
+    map:
+      name: name
+      model: platform.slug
+      group: site.slug
+      ip: primary_ip.address
+    headers:
+      Authorization: Token nbt_TJ4E5HmtH1sq.XB5vhcShQ4lAG9aKMAthZsIPD9EOMrBoJQv5QpAD
+    read_timeout: 120
+    pagination: true
+    pagination_key_name: next
+
+model_map:
+  cisco: ios
+  juniper: junos
+  frr: frr
+  frrouting-platform: frr
+  !ruby/regexp /procurve/: procurve
+
+logger:
+  # The default level is :info
+  # level: :info
+  appenders:
+    - type: syslog
+      level: :error
+    - type: stdout
+      level: :warn
+    - type: file
+      file: /home/oxidized/.config/oxidized/info.log

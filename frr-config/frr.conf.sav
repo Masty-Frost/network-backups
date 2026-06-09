@@ -1,0 +1,9 @@
+frr version 8.4_git
+frr defaults traditional
+hostname caab2adfa854
+domainname localdomain
+no ipv6 forwarding
+!
+password frr
+enable password frr
+!

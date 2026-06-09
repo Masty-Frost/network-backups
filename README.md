@@ -161,3 +161,20 @@ This repository is currently maintained by the community.
 The community is expected to help each other.
 
 Please consider sponsoring the maintainers of this project.
+
+-----------------------------------------------------------------------------------------
+
+# MODIFICATION:
+# Project: Automated Backups using Netbox and Oxidized
+
+## What is it and how it works?
+Automated system that saves information from devices such as routers and switches usign netbox and
+creates backups of the configurations (os version, ip address, etc) using Oxidized.
+
+## Requirements
+- Docker
+- Docker Compose
+- Linux (using WSL2 for example) or Windows (with Docker Desktop)
+
+## Fast Instalation
+Using this command: docker compose up -d

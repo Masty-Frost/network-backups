@@ -1,0 +1,74 @@
+---
+username: oxidized
+password: oxidized123
+model: junos
+interval: 3600
+debug: true
+threads: 30
+use_max_threads: false
+timeout: 20
+timelimit: 300
+retries: 3
+prompt: !ruby/regexp /^([\w.@-]+[#>]\s?)$/
+
+resolve_dns: false
+
+crash:
+  directory: "~/.config/oxidized/crashes"
+  hostnames: false
+
+vars:
+  enable: S3cr3tx
+
+pid: "~/.config/oxidized/oxidized.pid"
+
+# INTERFAZ WEB (Formato correcto)
+rest: 0.0.0.0:8888
+
+input:
+  default: ssh, telnet
+  debug: false
+  ssh:
+    secure: false
+
+output:
+  default: file
+  file:
+    directory: "~/.config/oxidized/configs"
+
+source:
+  default: http
+  http:
+    pagination: false
+    pagination_key_name: 'next'
+    # URL corregida sin caracteres inválidos
+    url: http://netbox-docker-netbox-1:8080/api/dcim/devices/?cf_oxidized_backup=true
+    scheme: http
+    secure: false
+    read_timeout: 120
+    hosts_location: 'results'
+    headers:
+      Authorization: "Bearer nbt_TJ4E5HmtH1sq.XB5vhcShQ4lAG9aKMAthZsIPD9EOMrBoJQv5QpAD"
+      Accept: "application/json"
+    map:
+      # Valores corregidos a los campos reales de la API de NetBox
+      name: name
+      model: platform.slug
+      ip: primary_ip.address
+    vars_map:
+      enable: enable
+
+model_map:
+  cisco: ios
+  juniper: junos
+  frr: junos
+  !ruby/regexp /procurve/: procurve
+
+logger:
+  appenders:
+  - type: syslog
+    level: :error
+  - type: stdout
+    level: :warn
+  - type: file
+    file: "~/.config/oxidized/info.log"
