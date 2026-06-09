@@ -176,5 +176,5 @@ creates backups of the configurations (os version, ip address, etc) using Oxidiz
 - Docker Compose
 - Linux (using WSL2 for example) or Windows (with Docker Desktop)
 
-## Fast Instalation
+## Fast Installation
 Using this command: docker compose up -d
