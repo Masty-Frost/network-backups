@@ -48,7 +48,7 @@ source:
     read_timeout: 120
     hosts_location: 'results'
     headers:
-      Authorization: "Bearer nbt_TJ4E5HmtH1sq.XB5vhcShQ4lAG9aKMAthZsIPD9EOMrBoJQv5QpAD"
+      Authorization: "Bearer <COMPLETE>.<TOKEN>"
       Accept: "application/json"
     map:
       # Valores corregidos a los campos reales de la API de NetBox
